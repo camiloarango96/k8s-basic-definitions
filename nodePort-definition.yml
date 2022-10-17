@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: my-app-service
+
+spec:
+  type: NodePort
+  ports:
+  #Pueden haber varios puertos, esto es una lista
+    - targetPort: 80
+      port: 80
+      nodePort: 30008
+#El selector asigna este servicio a los pods que tengas estas labels
+#Cuando hay match con varios pods, el servicio balancea las cargas de manera aleatoria
+#Este servicio se distribuye a traves de todos los nodos del cluster
+  selector:
+    app: my-app
+    type: front-end
+
